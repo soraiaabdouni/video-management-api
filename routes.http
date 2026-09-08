@@ -1,4 +1,8 @@
-POST http://localhost:3000/videos
+@API_URL = https://video-management-api-nslz.onrender.com
+
+###
+
+POST {{API_URL}}/videos
 Content-Type: application/json
 
 {
@@ -9,19 +13,19 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/videos
+GET {{API_URL}}/videos
 
 ###
 
-PUT http://localhost:3000/videos/f8a3c7c1-bc36-46dd-812e-01c2bd3b09c7
+PUT {{API_URL}}/videos/3e422c08-4761-4c71-b1c9-73c74fa4fa89
 Content-Type: application/json
 
 {
-    "title": "video 03",
+    "title": "video teste",
     "description": "Esse é o primeiro vídeo",
     "duration": 180
 }
 
 ###
 
-DELETE http://localhost:3000/videos/f8a3c7c1-bc36-46dd-812e-01c2bd3b09c7
+DELETE {{API_URL}}/videos/3e422c08-4761-4c71-b1c9-73c74fa4fa89
