@@ -1,4 +1,5 @@
 @API_URL = https://video-management-api-nslz.onrender.com
+@VIDEO_ID = COLOQUE_O_ID_AQUI
 
 ###
 
@@ -17,7 +18,7 @@ GET {{API_URL}}/videos
 
 ###
 
-PUT {{API_URL}}/videos/3e422c08-4761-4c71-b1c9-73c74fa4fa89
+PUT {{API_URL}}/videos/{{VIDEO_ID}}
 Content-Type: application/json
 
 {
@@ -28,4 +29,4 @@ Content-Type: application/json
 
 ###
 
-DELETE {{API_URL}}/videos/3e422c08-4761-4c71-b1c9-73c74fa4fa89
+DELETE {{API_URL}}/videos/{{VIDEO_ID}}
