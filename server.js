@@ -9,34 +9,51 @@
 // server.listen(3000)
 
 import { fastify } from 'fastify'
-import { DatabaseMemory } from './database-memory.js'
+import { DatabasePostgres } from './database-postgres.js';
 
-const server = fastify()
+const server = fastify();
+const database = new DatabasePostgres()
 
-const database = new DatabaseMemory()
+server.post('/videos', async (request, reply) => {
+    const { title, description, duration } = request.body
 
-server.post('/videos', () =>{
-    database.create({
-        title: 'Video 01',
-        description: "Esse é o vídeo 01",
-        duration: 180,
+    await database.create({
+        title,
+        description,
+        duration,
     })
 
-    console.log(database.list())
+    return reply.status(201).send()
 })
 
-server.get('/videos', () =>{
-    return 'Hello, Soraia!'
+server.get('/videos', async (request) => {
+    const search = request.query.search
+    const videos = await database.list(search)
+
+    return videos
 })
 
-server.put('/videos/:id', () =>{
-    return 'Hello, node.js!'
+server.put('/videos/:id', async (request, reply) => {
+    const videoId = request.params.id
+    const { title, description, duration } = request.body
+
+    await database.update(videoId, {
+        title,
+        description,
+        duration,
+    })
+
+    return reply.status(204).send()
 })
 
-server.put('/videos/:id', () =>{
-    return 'Hello, node.js!'
+server.delete('/videos/:id', async (request, reply) => {
+    const videoId = request.params.id
+
+    await database.delete(videoId)
+
+    return reply.status(204).send()
 })
 
 server.listen({
-    port: 3000,
+    port: process.env.PORT ?? 3333,
 })
